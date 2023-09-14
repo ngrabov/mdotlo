@@ -1,0 +1,1646 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="ExactFile" type="ExactFileType"/>
+  <xs:complexType name="ExactFileType">
+    <xs:sequence>
+      <xs:element name="FileId" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Exact's internal file identification</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:totalDigits value="10"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FileType" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>File type</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="30"/>
+            <xs:enumeration value="RIssCustomer"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="InstId" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>ID of the institution</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:totalDigits value="10"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="LogicalNetwork" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Partner identifier at all system levels</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FileDateTime" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Timestamp when the file was created, format is yyyyMMddHHmmss</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="14"/>
+            <xs:maxLength value="14"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="CutOffDate" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Date when the file was created, format is yyyyMMdd</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="8"/>
+            <xs:maxLength value="8"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FileName" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Name of the file, in format RIssCustomer_DWH_****_yyyyMMdd_HHmmss.xml</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="128"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FileSequenceNumber" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>This file is divided after every n records, where n is usually equal to 10000. So if there are 70000 records, there will be 7 files. This field denotes what is the current file's sequence number, i.e. in this case number between 1 and 7</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:totalDigits value="10"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FileMode" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>File status.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1"/>
+            <xs:enumeration value="T">
+              <xs:annotation>
+                <xs:documentation>Test</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="P">
+              <xs:annotation>
+                <xs:documentation>Production</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Source" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Transaction source</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="3"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="TotalFileCount" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Total number of files. This file is divided after every n records, where n is usually equal to 10000. So if there are 70000 records, there will be 7 files and total number will be 7. </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:totalDigits value="10"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="TotalRecordsCount" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Total number of records. This file is divided after every n records, where n is usually equal to 10000. So if there are 69500 records, there will be 7 files and total number of records will be 69500 in each of the 7 files. </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:totalDigits value="10"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="RecordsCount" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Number of records in the current file</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:totalDigits value="10"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Records" type="ArrayOfRIssCustomer" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfRIssCustomer">
+    <xs:sequence>
+      <xs:element name="RIssCustomer" type="RIssCustomerType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RIssCustomerType">
+    <xs:sequence>
+      <xs:element name="Addresses" type="ArrayOfAddress" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Addresses used by the customer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Cards" type="ArrayOfCard" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Cards used by the customer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CardAccounts" type="ArrayOfCardAccount" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>CardAccounts owned by the customer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="CustomerId" use="required">
+      <xs:annotation>
+        <xs:documentation>Partner provided customer identifier</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="20"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CustomerType" use="required">
+      <xs:annotation>
+        <xs:documentation>Customer type</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Name1" use="required">
+      <xs:annotation>
+        <xs:documentation>Person first name / Company short name</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Name2" use="required">
+      <xs:annotation>
+        <xs:documentation>Person last name / Company long name</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="300"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Gender">
+      <xs:annotation>
+        <xs:documentation>Gender of the customer when customer is a person</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="M">
+            <xs:annotation>
+              <xs:documentation>Male</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="F">
+            <xs:annotation>
+              <xs:documentation>Female</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Birthdate">
+      <xs:annotation>
+        <xs:documentation>Birthdate or company establishment date</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Title">
+      <xs:annotation>
+        <xs:documentation>Person's title</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ResidentialStatus">
+      <xs:annotation>
+        <xs:documentation>Customer's residential status</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value=""/>
+          <xs:enumeration value="D">
+            <xs:annotation>
+              <xs:documentation>Resident</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="N">
+            <xs:annotation>
+              <xs:documentation>NonResident</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="X">
+            <xs:annotation>
+              <xs:documentation>Uncategorized</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Email">
+      <xs:annotation>
+        <xs:documentation>Customer main e-mail address</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TelStat">
+      <xs:annotation>
+        <xs:documentation>Customer phone number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TelMobile">
+      <xs:annotation>
+        <xs:documentation>Customer mobile number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Password">
+      <xs:annotation>
+        <xs:documentation>Client’s password for identification over phone</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="300"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Code1">
+      <xs:annotation>
+        <xs:documentation>State identification number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Code2">
+      <xs:annotation>
+        <xs:documentation>Tax identification number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="UserData">
+      <xs:annotation>
+        <xs:documentation>Bank specific data fields</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="512"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAddress">
+    <xs:sequence>
+      <xs:element name="Address" type="Address" nillable="false" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Address">
+    <xs:attribute name="AddressId">
+      <xs:annotation>
+        <xs:documentation>Bank id of customer address. Used when address data is updated thru web services</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AddressType" use="required">
+      <xs:annotation>
+        <xs:documentation>Type of the address</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+          <xs:enumeration value="5"/>
+          <xs:enumeration value="6"/>
+          <xs:enumeration value="7"/>
+          <xs:enumeration value="8"/>
+          <xs:enumeration value="9"/>
+          <xs:enumeration value="10"/>
+          <xs:enumeration value="11"/>
+          <xs:enumeration value="12"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Name1" use="required">
+      <xs:annotation>
+        <xs:documentation>Person first name / company short name</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Name2" use="required">
+      <xs:annotation>
+        <xs:documentation>Person last name / company long name</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AddressLine1" use="required">
+      <xs:annotation>
+        <xs:documentation>Address line 1</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AddressLine2">
+      <xs:annotation>
+        <xs:documentation>Address line 2</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CityName" use="required">
+      <xs:annotation>
+        <xs:documentation>City name</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PostalCode" use="required">
+      <xs:annotation>
+        <xs:documentation>Postal code</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="20"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CountryCode" use="required">
+      <xs:annotation>
+        <xs:documentation>Country code</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Email">
+      <xs:annotation>
+        <xs:documentation>Email</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ContactPerson">
+      <xs:annotation>
+        <xs:documentation>Contact person for a company</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="100"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="UserData">
+      <xs:annotation>
+        <xs:documentation>Bank specific User Data</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="512"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfCard">
+    <xs:sequence>
+      <xs:element name="Card" type="Card" nillable="false" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Card">
+    <xs:attribute name="PAN" use="required">
+      <xs:annotation>
+        <xs:documentation>Primary Account Number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="19"/>
+          <xs:pattern value="[0-9]{6}[\*]+[0-9]{4}|[0-9]+"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Token" use="required">
+      <xs:annotation>
+        <xs:documentation>MPSI generated card identification number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="20"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RequestId">
+      <xs:annotation>
+        <xs:documentation>Bank defined  identification number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="20"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardAccount" use="required">
+      <xs:annotation>
+        <xs:documentation>Unique card account identification number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="32"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardType" use="required">
+      <xs:annotation>
+        <xs:documentation>Card product type</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardSubType" use="required">
+      <xs:annotation>
+        <xs:documentation>Card sub-product type</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardProfileId">
+      <xs:annotation>
+        <xs:documentation>Card fee profile Id</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="5"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="OwnershipType" use="required">
+      <xs:annotation>
+        <xs:documentation>Card ownership type</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="N">
+            <xs:annotation>
+              <xs:documentation>Basic(Primary)</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="P">
+            <xs:annotation>
+              <xs:documentation>Supplementary(Secondary)</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="B">
+            <xs:annotation>
+              <xs:documentation>Business</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BranchId">
+      <xs:annotation>
+        <xs:documentation>Id of branch which issued the card</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CurrencyCode" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>Currency of the credit card</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CardStatus" use="required">
+      <xs:annotation>
+        <xs:documentation>Card lifecycle status</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+          <xs:enumeration value="5"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BlockStatus" use="required">
+      <xs:annotation>
+        <xs:documentation>Card blocking status</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+          <xs:enumeration value="5"/>
+          <xs:enumeration value="6"/>
+          <xs:enumeration value="7"/>
+          <xs:enumeration value="A"/>
+          <xs:enumeration value="B"/>
+          <xs:enumeration value="C"/>
+          <xs:enumeration value="D"/>
+          <xs:enumeration value="E"/>
+          <xs:enumeration value="F"/>
+          <xs:enumeration value="G"/>
+          <xs:enumeration value="H"/>
+          <xs:enumeration value="I"/>
+          <xs:enumeration value="J"/>
+          <xs:enumeration value="K"/>
+          <xs:enumeration value="M"/>
+          <xs:enumeration value="L"/>
+          <xs:enumeration value="N"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BlockTimeStamp">
+      <xs:annotation>
+        <xs:documentation>Timestamp of card blocking. Format: YYYYMMDDHHMMSS</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="14"/>
+          <xs:maxLength value="14"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="EmbossingLine1" use="required">
+      <xs:annotation>
+        <xs:documentation>Cardholder name and surname</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="EmbossingLine2">
+      <xs:annotation>
+        <xs:documentation>Company short name if applicable</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValidFrom" use="required">
+      <xs:annotation>
+        <xs:documentation>Card validity from. Format: YYYYMMDD</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="8"/>
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValidThru" use="required">
+      <xs:annotation>
+        <xs:documentation>Card validity thru. Format: YYYYMMDD</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="8"/>
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CustomValidThru">
+      <xs:annotation>
+        <xs:documentation>Custom date until which card will be active. Format: YYYYMMDD</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="8"/>
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValidFromRenewed">
+      <xs:annotation>
+        <xs:documentation>Only for cards which are in the renewal/reissue process: New card validity from. Format: YYYYMMDD</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValidThruRenewed">
+      <xs:annotation>
+        <xs:documentation>Only for cards which are in the renewal/reissue process: New card validity thru. Format: YYYYMMDD</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardStatusRenewed">
+      <xs:annotation>
+        <xs:documentation>Only for cards which are in the renewal/reissue process: status of the new card</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value=""/>
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+          <xs:enumeration value="5"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PeriodicLimit">
+      <xs:annotation>
+        <xs:documentation>Periodic limit of the card</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CreationDate">
+      <xs:annotation>
+        <xs:documentation>Creation date of the card record. Format: YYYYMMDDHHmmss</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="14"/>
+          <xs:maxLength value="14"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="UserData">
+      <xs:annotation>
+        <xs:documentation>Bank specific User Data</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="512"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DailyLimitCategoryId">
+      <xs:annotation>
+        <xs:documentation>Daily limit category identifier</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="4"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitAll">
+      <xs:annotation>
+        <xs:documentation>The total amount of all transactions in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitNAll">
+      <xs:annotation>
+        <xs:documentation>Total count of all transactions in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitAtm">
+      <xs:annotation>
+        <xs:documentation>The total amount of cash withdrawn on any ATM machine in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitNAtm">
+      <xs:annotation>
+        <xs:documentation>The total count of withdrawals on any ATM machine in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitCashPos">
+      <xs:annotation>
+        <xs:documentation>Total amount of cash withdrawals on any POS terminal in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitNCashPos">
+      <xs:annotation>
+        <xs:documentation>The total count of withdrawals on any POS terminal in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitCashAll">
+      <xs:annotation>
+        <xs:documentation>Total amount of cash withdrawals on POS and ATM terminals in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitNCashAll">
+      <xs:annotation>
+        <xs:documentation>Total count of cash withdrawals on POS and ATM terminals in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitPos">
+      <xs:annotation>
+        <xs:documentation>The total amount of purchases on any POS terminal in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitNPos">
+      <xs:annotation>
+        <xs:documentation>The total count of purchases on any POS terminal in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitInt">
+      <xs:annotation>
+        <xs:documentation>The total amount of internet transactions in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitNInt">
+      <xs:annotation>
+        <xs:documentation>The total count internet transactions in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitPurchaseAll">
+      <xs:annotation>
+        <xs:documentation>Total amount of purchases on POS and Internet terminals in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LimitNPurchaseAll">
+      <xs:annotation>
+        <xs:documentation>Total count of purchases on POS and Internet terminals in one day</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PeriodicalLimitCash">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for cash transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PeriodicalLimitPurchase">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for purchases</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PosPurchaseDomesticAmount">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for domestic POS transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PosPurchaseInternationalAmount">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for international POS transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="InternetDomesticAmount">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for domestic internet transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="InternetInternationalAmount">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for international internet transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CashDomesticAmount">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for domestic cash transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CashInternationalAmount">
+      <xs:annotation>
+        <xs:documentation>Periodical (monthly) limit for international cash transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PreviousToken">
+      <xs:annotation>
+        <xs:documentation>In case this card was opened as reissue of existing card and PAN of a card was changed (usually lost stolen process) this value is filled with token value of original card</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="20"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ConversionStatus">
+      <xs:annotation>
+        <xs:documentation>Flag indicating if there was a product conversion on last issuing of a card</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value=""/>
+          <xs:enumeration value="C"/>
+          <xs:enumeration value="N"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="IssueReason">
+      <xs:annotation>
+        <xs:documentation>Code indicating why was card personalized</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="4"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+          <xs:enumeration value="5"/>
+          <xs:enumeration value="6"/>
+          <xs:enumeration value="7"/>
+          <xs:enumeration value="8"/>
+          <xs:enumeration value="9"/>
+          <xs:enumeration value="10"/>
+          <xs:enumeration value="11"/>
+          <xs:enumeration value="12"/>
+          <xs:enumeration value="13"/>
+          <xs:enumeration value="15"/>
+          <xs:enumeration value="100"/>
+          <xs:enumeration value="200"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ProductionStatus">
+      <xs:annotation>
+        <xs:documentation>Status of last personalized plastic</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value=""/>
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="B"/>
+          <xs:enumeration value="C"/>
+          <xs:enumeration value="D"/>
+          <xs:enumeration value="E"/>
+          <xs:enumeration value="F"/>
+          <xs:enumeration value="G"/>
+          <xs:enumeration value="I"/>
+          <xs:enumeration value="M"/>
+          <xs:enumeration value="P"/>
+          <xs:enumeration value="R"/>
+          <xs:enumeration value="S"/>
+          <xs:enumeration value="T"/>
+          <xs:enumeration value="W"/>
+          <xs:enumeration value="X"/>
+          <xs:enumeration value="Y"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PINProductionStatus">
+      <xs:annotation>
+        <xs:documentation>Status of PIN production. Used for tracking of card productions that are migrated to MPSI</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value=""/>
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="B"/>
+          <xs:enumeration value="C"/>
+          <xs:enumeration value="D"/>
+          <xs:enumeration value="E"/>
+          <xs:enumeration value="F"/>
+          <xs:enumeration value="G"/>
+          <xs:enumeration value="I"/>
+          <xs:enumeration value="M"/>
+          <xs:enumeration value="P"/>
+          <xs:enumeration value="R"/>
+          <xs:enumeration value="S"/>
+          <xs:enumeration value="T"/>
+          <xs:enumeration value="W"/>
+          <xs:enumeration value="X"/>
+          <xs:enumeration value="Y"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardDeliveryMethod">
+      <xs:annotation>
+        <xs:documentation>Delivery method which should be used for further reissuing of the card. If this is not populated, the default method defined on the product will be used.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardDeliveryBranchId">
+      <xs:annotation>
+        <xs:documentation>Identifier of the branch which will be used for further reissuing of the card. Mandatory if CardDeliveryMethod is “Delivery in the bank branch”</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardDeliveryAddressId">
+      <xs:annotation>
+        <xs:documentation>Bank’s identifier of the address which will be used for further reissuing of the card. Mandatory if CardDeliveryMethod is “Delivery by mail”</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PinDeliveryMethod">
+      <xs:annotation>
+        <xs:documentation>Delivery method which should be used for further reissuing of the card/PIN. If this is not populated, the default method defined on the product will be used.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PinDeliveryBranchId">
+      <xs:annotation>
+        <xs:documentation>Identifier of the branch which will be used for further reissuing of the card/ PIN. Mandatory if PinDeliveryMethod is “Delivery in the bank branch”</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PinDeliveryAddressId">
+      <xs:annotation>
+        <xs:documentation>Bank’s identifier of the address which will be used for further reissuing of the card/ PIN. Mandatory if PinDeliveryMethod is “Delivery by mail”</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MembershipFeeDate">
+      <xs:annotation>
+        <xs:documentation>Date of the last membership fee charging. Format: yyyyMMdd</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="0"/>
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DesignCode">
+      <xs:annotation>
+        <xs:documentation>Card plastic design code</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardBatchId">
+      <xs:annotation>
+        <xs:documentation>Card batch id</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="32"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PinBatchId">
+      <xs:annotation>
+        <xs:documentation>Pin batch id</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="32"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardContractId">
+      <xs:annotation>
+        <xs:documentation>Unique identifier of the card contract generated by MPSI. This data is not changed during the entire card's life cycle, regardless of reissuing, change of PAN, etc.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="20"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="IssInstallmentEnabled">
+      <xs:annotation>
+        <xs:documentation>Flag indicating whether issuing installments are enabled on card level.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="D"/>
+          <xs:enumeration value="N"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ContactlessLimitAmount">
+      <xs:annotation>
+        <xs:documentation>Contectless limit amount</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ContactlessLimitNo">
+      <xs:annotation>
+        <xs:documentation>Number of contactless transactions</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:totalDigits value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="GenerateStatement">
+      <xs:annotation>
+        <xs:documentation>Indicator for debit card statement generation</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="0"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DisableBalInquiry">
+      <xs:annotation>
+        <xs:documentation>Indicator whether balance can be shown to the cardholder</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="0"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="EMVContact" use="optional">
+      <xs:annotation>
+        <xs:documentation>Card has Contact feature</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="EMVCLess" use="optional">
+      <xs:annotation>
+        <xs:documentation>Card has Contactless feature</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MagneticStripe" use="optional">
+      <xs:annotation>
+        <xs:documentation>Card has Magnetic Stripe</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Virtual" use="optional">
+      <xs:annotation>
+        <xs:documentation>Card is Virtual</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="VirtualWithPlastic" use="optional">
+      <xs:annotation>
+        <xs:documentation>Card is Virtual with physical card issued</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+	   <xs:attribute name="CardStatusDate">
+      <xs:annotation>
+        <xs:documentation>Date and time of the last status changed. Format: YYYYMMDDHHMMSS</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="14"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+	  <xs:attribute name="CardLimitsDate">
+		  <xs:annotation>
+			  <xs:documentation>Date and time of the last modification of card level limits. Format: YYYYMMDDHHMMSS</xs:documentation>
+		  </xs:annotation>
+		  <xs:simpleType>
+			  <xs:restriction base="xs:string">
+				  <xs:maxLength value="14"/>
+			  </xs:restriction>
+		  </xs:simpleType>
+	  </xs:attribute>
+	  <xs:attribute name="CardForm">
+		  <xs:annotation>
+			  <xs:documentation>Card form</xs:documentation>
+		  </xs:annotation>
+		  <xs:simpleType>
+			  <xs:restriction base="xs:short">
+			  </xs:restriction>
+		  </xs:simpleType>
+	  </xs:attribute>
+		  <xs:attribute name="CustomCardForm">
+			  <xs:annotation>
+				  <xs:documentation>Custom Card Form</xs:documentation>
+			  </xs:annotation>
+			  <xs:simpleType>
+				  <xs:restriction base="xs:short">
+				  </xs:restriction>
+			  </xs:simpleType>
+	  </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfCardAccount">
+    <xs:sequence>
+      <xs:element name="CardAccount" type="CardAccount" nillable="false" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardAccount">
+    <xs:attribute name="CardAccount" use="required">
+      <xs:annotation>
+        <xs:documentation>Bank provided card account number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="32"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BillingAccount">
+      <xs:annotation>
+        <xs:documentation>Bank provided billing account number</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="32"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AuthStatus" use="required">
+      <xs:annotation>
+        <xs:documentation>Account authorization status</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="Z"/>
+          <xs:enumeration value="U"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BillingStatus">
+      <xs:annotation>
+        <xs:documentation>Account billing status</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="10"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BillingStatusReason">
+      <xs:annotation>
+        <xs:documentation>Account billing status reason</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="15"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BillingHistoryDate">
+      <xs:annotation>
+        <xs:documentation>Date when Billing status is applied. Format: YYYYMMDDhhmmss</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="0"/>
+          <xs:maxLength value="8"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PaymentSchema" use="required">
+      <xs:annotation>
+        <xs:documentation>Payment schema</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PeriodicLimit">
+      <xs:annotation>
+        <xs:documentation>Periodic limit on the card account</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CreationDate">
+      <xs:annotation>
+        <xs:documentation>Creation date of the card account record. Format: YYYYMMDDhhmmss</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="14"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CurrencyCode" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>Currency of the credit card</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="PenaltyInterestSchema">
+      <xs:annotation>
+        <xs:documentation>Penalty interest schema</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="5"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="StandardInterestSchema">
+      <xs:annotation>
+        <xs:documentation>Standard interest schema</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="5"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="UserData">
+      <xs:annotation>
+        <xs:documentation>Bank specific user data</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="512"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PaymentFreq" use="required">
+      <xs:annotation>
+        <xs:documentation>Payment frequency for the CardAccount</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PaymentType" use="required">
+      <xs:annotation>
+        <xs:documentation>Payment type</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="1"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+          <xs:enumeration value="5"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="StatementAddressId">
+      <xs:annotation>
+        <xs:documentation>Identifier of an address for delivery of the statement</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CardAccountRef">
+      <xs:annotation>
+        <xs:documentation>Card account reference number (fulfilled only if PaymentType is 3 or 4)</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="50"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AccountPeriodicalLimit">
+      <xs:annotation>
+        <xs:documentation>Account periodical limit</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AccountPeriodicalLimitCash">
+      <xs:annotation>
+        <xs:documentation>Account periodical limit cash</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AccountPeriodicalLimitPurchase">
+      <xs:annotation>
+        <xs:documentation>Account periodical limit purchase</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="InstallmentAmountTotal">
+      <xs:annotation>
+        <xs:documentation>Installment amount total</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="InstallmentAmountMonthly">
+      <xs:annotation>
+        <xs:documentation>Installment amount monthly</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:totalDigits value="15"/>
+          <xs:fractionDigits value="2"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+	  <xs:attribute name="CardAccountLimitsDate">
+		  <xs:annotation>
+			  <xs:documentation>Date and time of the last modification of card account level limits. Format: YYYYMMDDHHMMSS</xs:documentation>
+		  </xs:annotation>
+		  <xs:simpleType>
+			  <xs:restriction base="xs:string">
+				  <xs:maxLength value="14"/>
+			  </xs:restriction>
+		  </xs:simpleType>
+	  </xs:attribute>  
+  </xs:complexType>
+</xs:schema>
